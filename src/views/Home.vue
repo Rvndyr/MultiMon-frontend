@@ -20,7 +20,7 @@ export default {
   data: function () {
     return {
       message: "Welcome to Vue.js!",
-      twitchAccessToken: null,
+      twitchAccessToken: [],
     };
   },
   created: function () {
