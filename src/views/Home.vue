@@ -3,12 +3,13 @@
     <div>
       <h1>Authorize Twitch</h1>
       <a
-        href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:follows"
+        href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
       >
         Authorize Twitch
       </a>
     </div>
     <h1>{{ message }}</h1>
+    {{ follows }}
   </div>
 </template>
 
@@ -21,6 +22,7 @@ export default {
     return {
       message: "Welcome to Vue.js!",
       twitchAccessToken: [],
+      follows: [],
     };
   },
   created: function () {
@@ -41,6 +43,7 @@ export default {
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
         .then((response) => {
           console.log("Twitch user info", response.data);
+          this.follows = response.data.follows;
         });
     }
   },
