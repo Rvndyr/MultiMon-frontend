@@ -3,7 +3,7 @@
     <div>
       <h1>Authorize Twitch</h1>
       <a
-        href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code"
+        href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:follows"
       >
         Authorize Twitch
       </a>
@@ -35,7 +35,7 @@ export default {
       });
     }
     this.twitchAccessToken = localStorage.getItem("twitch_access_token");
-    if (this.spotifyAccessToken) {
+    if (this.twitchAccessToken) {
       // Get user info
       axios
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
