@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please
+        enable it to continue.
+      </strong>
     </noscript>
     <div id="app"></div>
+    <div id="31688366"></div>
+    <!-- <div id="twitch-embed"></div> -->
     <!-- built files will be auto injected -->
+
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script type="text/javascript">
+      var options = {
+        width: 854,
+        height: 480,
+        channel: "symfuhny",
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com
+        parent: ["embed.example.com", "othersite.example.com"],
+      };
+      var player = new Twitch.Player("31688366", options);
+      player.setVolume(0.5);
+    </script>
   </body>
 </html>

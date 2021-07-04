@@ -8,8 +8,15 @@
         Authorize Twitch
       </a>
     </div>
-    <h1>{{ message }}</h1>
-    {{ follows }}
+
+    <div v-for="follow in follows" v-bind:key="follow.id">
+      <!-- {{ follow.user_name }} -->
+      <div id="VideoSection">
+        <div v-on:click="twitchPlayer(follow)" v-bind:id="follow.user_id">
+          {{ follow.user_name }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,9 +27,9 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Welcome to Vue.js!",
       twitchAccessToken: [],
       follows: [],
+      streams: [],
     };
   },
   created: function () {
@@ -44,9 +51,16 @@ export default {
         .then((response) => {
           console.log("Twitch user info", response.data);
           this.follows = response.data.follows;
+          // console.log(this.follows[0].user_name);
         });
     }
   },
-  methods: {},
+  mounted() {},
+  methods: {
+    twitchPlayer: function (follow) {
+      this.follow = follow;
+      console.log("TwitchPlayer Function", this.follow);
+    },
+  },
 };
 </script>
