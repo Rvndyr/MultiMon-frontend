@@ -76,8 +76,7 @@ export default {
   mounted() {},
   methods: {
     twitchPlayer: function (follow) {
-      this.follow = follow;
-      console.log("TwitchPlayer Function", this.follow);
+      console.log("TwitchPlayer Function", follow);
       let options = {
         width: 854,
         height: 480,
@@ -85,7 +84,8 @@ export default {
         // only needed if your site is also embedded on embed.example.com and othersite.example.com
         parent: ["embed.example.com", "othersite.example.com"],
       };
-      let player = new Twitch.Player(follow.user_id, options);
+      // change Embed to Player to remove chat from video
+      let player = new Twitch.Embed(follow.user_id, options);
       player.setVolume(0.5);
       console.log(player);
     },
