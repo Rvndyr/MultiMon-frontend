@@ -11,19 +11,24 @@
     <div class="row">
       <div class="col-sm border border-dark" v-if="twitchAccessToken">
         Followers:
-        <div v-for="follow in follows" v-bind:key="follow.id">
+        <div class="border rounded-pill border-2 border-dark" v-for="follow in follows" v-bind:key="follow.id">
           <!-- {{ follow.user_name }} -->
           <div id="VideoSection">
-            <div v-on:click="twitchPlayer(follow)" v-bind:id="follow.user_id">{{ follow.user_name }}</div>
+            <div v-on:click="twitchPlayer(follow)">{{ follow.user_name }}</div>
           </div>
         </div>
       </div>
 
-      <div class="col-sm border border-dark"><div id="31688366"></div></div>
+      <div class="col-sm border border-dark">
+        <!-- Show the videoPlayer from clicked Follower -->
+        <div v-for="follow in follows" v-bind:key="follow.id">
+          <div v-bind:id="follow.user_id"></div>
+        </div>
+      </div>
       <div class="col-sm border border-dark">
         <iframe
-          src="https://www.twitch.tv/embed/symfuhny/chat?parent=http://localhost:8080"
-          allow-same-origin
+          src="https://www.twitch.tv/embed/destroy/chat?parent=http://localhost:8080"
+          allow-same-origin="true"
           height="500"
           width="350"
         ></iframe>
@@ -68,12 +73,7 @@ export default {
         });
     }
   },
-  mounted() {
-    // Add script tag to head in HTML
-    let twitchEmbed = document.createElement("script");
-    twitchEmbed.setAttribute("src", "https://embed.twitch.tv/embed/v1.js");
-    document.head.appendChild(twitchEmbed);
-  },
+  mounted() {},
   methods: {
     twitchPlayer: function (follow) {
       this.follow = follow;
