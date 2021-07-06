@@ -85,7 +85,14 @@ export default {
       // change Embed to Player to remove chat from video
       let player = new Twitch.Embed(follow.user_id, options);
       player.setVolume(0.5);
-      console.log(player);
+      console.log("This is the clicked Player:", player);
+      console.log("This is the clicked iFrame:", player._iframe);
+      this.streams.push(player);
+      if (this.streams.length === 3) {
+        this.streams[0]._iframe.remove();
+        this.streams[0].shift();
+      }
+      console.log("These are the streams clicked:", this.streams);
     },
   },
 };
