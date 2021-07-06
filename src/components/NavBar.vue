@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3b3b44">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Twitch Multi-Mon</a>
         <button
@@ -23,7 +23,7 @@
             <li class="nav-item">
               <router-link class="nav-link" to="About">About</router-link>
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -41,14 +41,14 @@
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
+            </li> -->
+            <!-- <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            </li> -->
           </ul>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-secondary" type="submit">Search</button>
           </form>
         </div>
       </div>
@@ -61,4 +61,9 @@ export default {};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+a {
+  color: #fff !important;
+  font-weight: 500;
+}
+</style>

@@ -1,16 +1,21 @@
 <template>
   <div class="home">
-    <div v-if="!twitchAccessToken">
-      <h1>Authorize Twitch</h1>
-      <a
-        href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
-      >
-        Authorize Twitch
-      </a>
-    </div>
+    <section v-if="!twitchAccessToken">
+      <!-- <div> -->
+      <main class="container text-center">
+        <h1>Welcome!</h1>
+        <h2>Please Sign in</h2>
+        <button
+          class="btn btn-lg btn-secondary"
+          href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
+        >
+          Sign in with Twitch
+        </button>
+      </main>
+    </section>
     <div class="row">
-      <div class="col-sm border border-dark" v-if="twitchAccessToken">
-        Followers:
+      <div class="col-sm border-end border-dark" v-if="twitchAccessToken">
+        <span><h3>Followers:</h3></span>
 
         <div class="border" v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
@@ -21,16 +26,15 @@
                   <div class="fw-bold">{{ follow.user_name }}</div>
                   Playing: {{ follow.game_name }}
                 </div>
-                <!-- <span class="badge bg-primary rounded-pill">14</span> -->
               </li>
             </ol>
           </div>
         </div>
       </div>
 
-      <div class="col-sm border border-dark">
+      <div class="col-sm border-start border-dark">
         <!-- Show the videoPlayer from clicked Follower -->
-        Twitch Player:
+        <span><h3>Twitch Player:</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
@@ -47,7 +51,11 @@
   </div>
 </template>
 
-<style></style>
+<style>
+.welcome-btn {
+  color: #6610f2;
+}
+</style>
 
 <script>
 /* global Twitch */
@@ -55,7 +63,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      twitchAccessToken: [],
+      twitchAccessToken: null,
       follows: [],
       streams: [],
     };
@@ -72,6 +80,7 @@ export default {
       });
     }
     this.twitchAccessToken = localStorage.getItem("twitch_access_token");
+    console.log("Helloppp", this.twitchAccessToken);
     if (this.twitchAccessToken) {
       // Get user info
       axios
@@ -95,7 +104,7 @@ export default {
         parent: ["embed.example.com", "othersite.example.com"],
       };
       // change Embed to Player to remove chat from video
-      let player = new Twitch.Player(follow.user_id, options);
+      let player = new Twitch.Embed(follow.user_id, options);
       player.setVolume(0.5);
       console.log("This is the clicked Player:", player);
       console.log("This is the clicked iFrame:", player._iframe);
