@@ -11,28 +11,26 @@
     <div class="row">
       <div class="col-sm border border-dark" v-if="twitchAccessToken">
         Followers:
-        <div class="border rounded-pill border-2 border-dark" v-for="follow in follows" v-bind:key="follow.id">
-          <!-- {{ follow.user_name }} -->
-          <div id="VideoSection">
-            <div v-on:click="twitchPlayer(follow)">{{ follow.user_name }}</div>
-          </div>
+        <div class="border" v-for="follow in follows" v-bind:key="follow.id">
+          <div v-on:click="twitchPlayer(follow)">{{ follow.user_name }}</div>
         </div>
       </div>
 
       <div class="col-sm border border-dark">
         <!-- Show the videoPlayer from clicked Follower -->
+        Twitch Player:
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
       </div>
-      <div class="col-sm border border-dark">
+      <!-- <div class="col-sm border border-dark">
         <iframe
           src="https://www.twitch.tv/embed/destroy/chat?parent=http://localhost:8080"
           allow-same-origin="true"
           height="500"
           width="350"
         ></iframe>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
