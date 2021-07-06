@@ -14,7 +14,7 @@
       </main>
     </section>
     <div class="row">
-      <div class="col-sm border-end border-dark" v-if="twitchAccessToken">
+      <div class="col-sm p-3 border-end border-dark" v-if="twitchAccessToken">
         <span><h3>Followers:</h3></span>
 
         <div class="border" v-for="follow in follows" v-bind:key="follow.id">
@@ -24,7 +24,7 @@
               <li class="list-group-item-action d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                   <div class="fw-bold">{{ follow.user_name }}</div>
-                  Playing: {{ follow.game_name }}
+                  Playing: {{ follow.game_name }} | Viewer Count: {{ follow.viewer_count }}
                 </div>
               </li>
             </ol>
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="col-sm border-start border-dark">
+      <div class="col-sm p-3 border-start border-dark">
         <!-- Show the videoPlayer from clicked Follower -->
         <span><h3>Twitch Player:</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
@@ -104,7 +104,7 @@ export default {
         parent: ["embed.example.com", "othersite.example.com"],
       };
       // change Embed to Player to remove chat from video
-      let player = new Twitch.Embed(follow.user_id, options);
+      let player = new Twitch.Player(follow.user_id, options);
       player.setVolume(0.5);
       console.log("This is the clicked Player:", player);
       console.log("This is the clicked iFrame:", player._iframe);
