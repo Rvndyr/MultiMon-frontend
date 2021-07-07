@@ -115,7 +115,7 @@
               :id="`chat-${stream.user_id}-embed`"
               frameborder="0"
               scrolling="no"
-              class="chatbox"
+              class="chatcanvas"
               :src="`https://www.twitch.tv/embed/${stream.user_name}/chat?parent=localhost:8080`"
               allow-same-origin="true"
               allow-storage-access-by-user-activation="true"
@@ -133,7 +133,7 @@ iframe {
   border: 0 none;
 }
 
-.chatbox {
+.chatcanvas {
   float: right;
   width: 350px;
   height: 85vh;
