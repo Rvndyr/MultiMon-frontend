@@ -91,7 +91,7 @@
               aria-controls="home"
               aria-selected="true"
             >
-              Home
+              <div>Chat 1</div>
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -105,23 +105,33 @@
               aria-controls="profile"
               aria-selected="false"
             >
-              Profile
+              <div>Chat 2</div>
             </button>
           </li>
         </ul>
-        <div class="tab-content" id="myTabContent" v-for="stream in streams" v-bind:key="stream.user_id">
+        <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <iframe
-              :id="`chat-${stream.user_id}-embed`"
+              :id="`chat-${streams[0].user_id}-embed`"
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${stream.user_name}/chat?parent=localhost:8080`"
-              allow-same-origin="true"
+              :src="`https://www.twitch.tv/embed/${streams[0].user_name}/chat?parent=localhost`"
               allow-storage-access-by-user-activation="true"
+              v-if="streams.length > 0"
             ></iframe>
           </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">1</div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <iframe
+              :id="`chat-${streams[1].user_id}-embed`"
+              frameborder="0"
+              scrolling="no"
+              class="chatcanvas"
+              :src="`https://www.twitch.tv/embed/${streams[1].user_name}/chat?parent=localhost`"
+              allow-storage-access-by-user-activation="true"
+              v-if="streams.length > 1"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -172,7 +182,7 @@ export default {
       axios
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
         .then((response) => {
-          console.log("Twitch user info", response.data);
+          // console.log("Twitch user info", response.data);
           this.follows = response.data.follows;
           // console.log(this.follows[0].user_name);
         });
@@ -181,7 +191,7 @@ export default {
   mounted() {},
   methods: {
     twitchPlayer: function (follow) {
-      console.log("TwitchPlayer Function", follow);
+      // console.log("TwitchPlayer Function", follow);
       let options = {
         width: 950,
         height: 600,
@@ -192,20 +202,18 @@ export default {
       // change Embed to Player to remove chat from video
       let player = new Twitch.Player(follow.user_id, options);
       player.setVolume(0.5);
-      console.log("This is the clicked Player:", player);
-      console.log("This is the clicked iFrame:", player._iframe);
-      // Remove a stream if more than 2: delete iFrame from streams array
+      // console.log("This is the clicked Player:", player);
+      // console.log("This is the clicked iFrame:", player._iframe);
       follow.player = player;
       this.streams.push(follow);
+
+      // Remove a stream if more than 2: delete iFrame from streams array
       if (this.streams.length === 3) {
         this.streams[0].player._iframe.remove();
         this.streams[0].shift();
       }
-      console.log("These are the streams clicked:", this.streams);
     },
-    twitchChat: function (streams) {
-      console.log("These are my current streams:", streams);
-    },
+    twitchChat: function () {},
   },
 };
 </script>
