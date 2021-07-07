@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <section v-if="!twitchAccessToken === null"> -->
+    <!-- <section v-show="!twitchAccessToken === null"> -->
     <section>
       <main class="container text-center">
         <h1>Welcome!</h1>
@@ -43,7 +43,7 @@
 
       <div class="col-sm border-dark">
         <button
-          class="btn btn-primary"
+          class="btn btn-outline-success"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
@@ -192,12 +192,14 @@ export default {
       player.setVolume(0.5);
       follow.player = player;
       this.streams.push(follow);
-
-      // Remove a stream if more than 2: delete iFrame from streams array
-      if (this.streams.length === 3) {
-        this.streams[0].player._iframe.remove();
-        this.streams[0].shift();
+      for (let i = 0; i < this.streams.length; i++) {
+        console.log("Logging streams:", this.streams[i].user_name);
+        if (this.streams.length === 3) {
+          this.streams[0].player._iframe.remove();
+          this.streams[0].shift;
+        }
       }
+      // Remove a stream if more than 2: delete iFrame from streams array
       // let removeBtn = document.createElement("button");
       // removeBtn.setAttribute("class", "btn-close");
       // document.head.appendChild(ckeditor);
