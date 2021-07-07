@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <section v-if="!twitchAccessToken">
-      <!-- <div> -->
+    <!-- <section v-if="!twitchAccessToken"> -->
+    <section>
       <main class="container text-center">
         <h1>Welcome!</h1>
         <h2>Please Sign in</h2>
-        <button
+        <a
           class="btn btn-lg btn-secondary"
           href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
         >
           Sign in with Twitch
-        </button>
+        </a>
       </main>
     </section>
     <div class="row">
@@ -39,21 +39,107 @@
           <div v-bind:id="follow.user_id"></div>
         </div>
       </div>
-      <!-- <div class="col-sm border border-dark">
+      <!-- <div id="chat-`+ follow.user_name + `" class="stream_chat">
         <iframe
-          src="https://www.twitch.tv/embed/destroy/chat?parent=http://localhost:8080"
-          allow-same-origin="true"
-          height="500"
-          width="350"
+          frameborder="0"
+          scrolling="no"
+          id="chat-213670810-embed"
+          src="https://twitch.tv/embed/puresobertv/chat?parent=localhost:8080"
+          height="100%"
+          width="100%"
         ></iframe>
       </div> -->
+
+      <div id="120244187" class="col-sm border-dark">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+          aria-controls="offcanvasScrolling"
+          v-on:click="twitchChat()"
+        >
+          Open Chat
+        </button>
+      </div>
+    </div>
+    <!-- Offcanvas Modal -->
+    <div
+      class="offcanvas offcanvas-end"
+      data-bs-scroll="true"
+      data-bs-backdrop="false"
+      tabindex="0"
+      id="offcanvasScrolling"
+      aria-labelledby="offcanvasScrollingLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Twitch Chat</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- Nav inside offcanvas modal - This is where chat goes -->
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Home
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Profile
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent" v-for="stream in streams" v-bind:key="stream.user_id">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <iframe
+              :id="`chat-${stream.user_id}-embed`"
+              frameborder="0"
+              scrolling="no"
+              class="chatbox"
+              :src="`https://www.twitch.tv/embed/${stream.user_name}/chat?parent=localhost:8080`"
+              allow-same-origin="true"
+              allow-storage-access-by-user-activation="true"
+            ></iframe>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">1</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
-.welcome-btn {
-  color: #6610f2;
+iframe {
+  border: 0 none;
+}
+
+.chatbox {
+  float: right;
+  width: 350px;
+  height: 85vh;
+  margin: 0px;
+  /* margin-left: -100px; */
+  padding: 0;
 }
 </style>
 
@@ -109,12 +195,16 @@ export default {
       console.log("This is the clicked Player:", player);
       console.log("This is the clicked iFrame:", player._iframe);
       // Remove a stream if more than 2: delete iFrame from streams array
-      this.streams.push(player);
+      follow.player = player;
+      this.streams.push(follow);
       if (this.streams.length === 3) {
-        this.streams[0]._iframe.remove();
+        this.streams[0].player._iframe.remove();
         this.streams[0].shift();
       }
       console.log("These are the streams clicked:", this.streams);
+    },
+    twitchChat: function (streams) {
+      console.log("These are my current streams:", streams);
     },
   },
 };
