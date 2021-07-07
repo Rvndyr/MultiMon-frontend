@@ -14,7 +14,7 @@
       </main>
     </section>
     <div class="row">
-      <div class="col-sm p-3 border-end border-dark" v-if="twitchAccessToken">
+      <div class="col-sm p-3" v-if="twitchAccessToken">
         <span><h3>Followers:</h3></span>
 
         <div v-for="follow in follows" v-bind:key="follow.id">
@@ -34,14 +34,14 @@
       </div>
 
       <!-- Show the videoPlayer from clicked Follower -->
-      <div class="col-sm p-3 border-start border-dark">
-        <span><h3>Twitch Player:</h3></span>
+      <div class="col-sm p-3">
+        <span class="justify-content-center"><h3>Twitch Player:</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
       </div>
 
-      <div class="col-sm border-dark">
+      <div class="col-sm">
         <button
           class="btn btn-outline-success"
           type="button"
@@ -192,17 +192,15 @@ export default {
       player.setVolume(0.5);
       follow.player = player;
       this.streams.push(follow);
-      for (let i = 0; i < this.streams.length; i++) {
-        console.log("Logging streams:", this.streams[i].user_name);
-        if (this.streams.length === 3) {
-          this.streams[0].player._iframe.remove();
-          this.streams[0].shift;
+      let sortedStreams = this.streams.sort((a, b) => b - a);
+      for (let i = 0; i < sortedStreams.length; i++) {
+        console.log("Logging streams:", sortedStreams[i].user_name);
+        if (sortedStreams.length === 3) {
+          sortedStreams[0].player._iframe.remove();
+          sortedStreams[0].shift;
         }
       }
       // Remove a stream if more than 2: delete iFrame from streams array
-      // let removeBtn = document.createElement("button");
-      // removeBtn.setAttribute("class", "btn-close");
-      // document.head.appendChild(ckeditor);
     },
     removePlayer: function () {},
   },
