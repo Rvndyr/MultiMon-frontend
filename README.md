@@ -1,24 +1,30 @@
-# capstone-frontend
+# Twitch Multi-Mon
 
-## Project setup
-```
-npm install
+Multi-Mon is a tool that allows a twitch user to watch multiple streams at once in 1 browser window.
+Remove the frustration of going into multiple tabs to support your streamer friends with views. You can now stay in one window and watch and chat with multiple streamers at once!
+
+## Contributing
+
+Contributions are always welcome! I am always a student and willing to learn. Please feel free to submit a PR for fixes, upgrades, and/or enhancements!
+
+## Installation
+
+    1. clone this repo
+    2. run the following commands
+
+```bash
+
+  cd capstone-frontend
+  npm install
+  npm run serve
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Tech Stack
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Client:** Vue, Vue Router, Axios, BootstrapCSS
 
-### Lints and fixes files
-```
-npm run lint
-```
+**Server:** Node, Ruby on Rails
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 🔗 Links
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/randyrod/)

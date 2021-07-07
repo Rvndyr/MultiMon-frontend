@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <section v-if="!twitchAccessToken"> -->
+    <!-- <section v-if="!twitchAccessToken === null"> -->
     <section>
       <main class="container text-center">
         <h1>Welcome!</h1>
@@ -17,13 +17,14 @@
       <div class="col-sm p-3 border-end border-dark" v-if="twitchAccessToken">
         <span><h3>Followers:</h3></span>
 
-        <div class="border" v-for="follow in follows" v-bind:key="follow.id">
+        <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
-            <!-- {{ follow.user_name }} -->
-            <ol class="list-group">
+            <ol class="list-group list-group-flush">
               <li class="list-group-item-action d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                  <div class="fw-bold">{{ follow.user_name }}</div>
+                  <div class="fw-bold">
+                    {{ follow.user_name }}
+                  </div>
                   Playing: {{ follow.game_name }} | Viewer Count: {{ follow.viewer_count }}
                 </div>
               </li>
@@ -32,32 +33,21 @@
         </div>
       </div>
 
+      <!-- Show the videoPlayer from clicked Follower -->
       <div class="col-sm p-3 border-start border-dark">
-        <!-- Show the videoPlayer from clicked Follower -->
         <span><h3>Twitch Player:</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
       </div>
-      <!-- <div id="chat-`+ follow.user_name + `" class="stream_chat">
-        <iframe
-          frameborder="0"
-          scrolling="no"
-          id="chat-213670810-embed"
-          src="https://twitch.tv/embed/puresobertv/chat?parent=localhost:8080"
-          height="100%"
-          width="100%"
-        ></iframe>
-      </div> -->
 
-      <div id="120244187" class="col-sm border-dark">
+      <div class="col-sm border-dark">
         <button
           class="btn btn-primary"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
           aria-controls="offcanvasScrolling"
-          v-on:click="twitchChat()"
         >
           Open Chat
         </button>
@@ -91,7 +81,7 @@
               aria-controls="home"
               aria-selected="true"
             >
-              <div>Chat 1</div>
+              <div v-if="streams.length > 0">{{ streams[0].user_name }}</div>
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -105,7 +95,7 @@
               aria-controls="profile"
               aria-selected="false"
             >
-              <div>Chat 2</div>
+              <div v-if="streams.length > 1">{{ streams[1].user_name }}</div>
             </button>
           </li>
         </ul>
@@ -148,7 +138,6 @@ iframe {
   width: 350px;
   height: 85vh;
   margin: 0px;
-  /* margin-left: -100px; */
   padding: 0;
 }
 </style>
@@ -191,7 +180,6 @@ export default {
   mounted() {},
   methods: {
     twitchPlayer: function (follow) {
-      // console.log("TwitchPlayer Function", follow);
       let options = {
         width: 950,
         height: 600,
@@ -202,8 +190,6 @@ export default {
       // change Embed to Player to remove chat from video
       let player = new Twitch.Player(follow.user_id, options);
       player.setVolume(0.5);
-      // console.log("This is the clicked Player:", player);
-      // console.log("This is the clicked iFrame:", player._iframe);
       follow.player = player;
       this.streams.push(follow);
 
@@ -212,8 +198,11 @@ export default {
         this.streams[0].player._iframe.remove();
         this.streams[0].shift();
       }
+      // let removeBtn = document.createElement("button");
+      // removeBtn.setAttribute("class", "btn-close");
+      // document.head.appendChild(ckeditor);
     },
-    twitchChat: function () {},
+    removePlayer: function () {},
   },
 };
 </script>
