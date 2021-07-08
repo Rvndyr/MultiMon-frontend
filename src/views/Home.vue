@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <section v-show="!twitchAccessToken === null"> -->
+    <!-- <section v-if="!twitchAccessToken === null"> -->
     <section>
       <main class="container text-center">
         <h1>Welcome!</h1>
@@ -81,7 +81,7 @@
               aria-controls="home"
               aria-selected="true"
             >
-              <div v-if="streams.length > 0">{{ streams[0].user_name }}</div>
+              <div v-if="this.sortedStreams.length > 0">{{ this.sortedStreams[0].user_name }}</div>
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -95,31 +95,31 @@
               aria-controls="profile"
               aria-selected="false"
             >
-              <div v-if="streams.length > 1">{{ streams[1].user_name }}</div>
+              <div v-if="this.sortedStreams.length > 1">{{ this.sortedStreams[1].user_name }}</div>
             </button>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="tab-pane fade show active twitch-chat" id="home" role="tabpanel" aria-labelledby="home-tab">
             <iframe
-              :id="`chat-${streams[0].user_id}-embed`"
+              id="chat-embed"
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${streams[0].user_name}/chat?parent=localhost`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[0].user_name}/chat?parent=localhost`"
               allow-storage-access-by-user-activation="true"
-              v-if="streams.length > 0"
+              v-if="this.sortedStreams.length > 0"
             ></iframe>
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <iframe
-              :id="`chat-${streams[1].user_id}-embed`"
+              :id="`chat-${this.sortedStreams[1].user_id}-embed`"
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${streams[1].user_name}/chat?parent=localhost`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[1].user_name}/chat?parent=localhost`"
               allow-storage-access-by-user-activation="true"
-              v-if="streams.length > 1"
+              v-if="this.sortedStreams.length > 1"
             ></iframe>
           </div>
         </div>
@@ -151,6 +151,7 @@ export default {
       twitchAccessToken: null,
       follows: [],
       streams: [],
+      sortedStreams: [],
     };
   },
   created: function () {
@@ -171,9 +172,7 @@ export default {
       axios
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
         .then((response) => {
-          // console.log("Twitch user info", response.data);
           this.follows = response.data.follows;
-          // console.log(this.follows[0].user_name);
         });
     }
   },
@@ -184,7 +183,6 @@ export default {
         width: 950,
         height: 600,
         channel: follow.user_name,
-        // only needed if your site is also embedded on embed.example.com and othersite.example.com
         parent: ["embed.example.com", "othersite.example.com"],
       };
       // change Embed to Player to remove chat from video
@@ -192,14 +190,21 @@ export default {
       player.setVolume(0.5);
       follow.player = player;
       this.streams.push(follow);
-      let sortedStreams = this.streams.sort((a, b) => b - a);
-      for (let i = 0; i < sortedStreams.length; i++) {
-        console.log("Logging streams:", sortedStreams[i].user_name);
-        if (sortedStreams.length === 3) {
-          sortedStreams[0].player._iframe.remove();
-          sortedStreams[0].shift;
+
+      this.sortedStreams = this.streams.sort((a, b) => b - a);
+      for (let i = 0; i < this.sortedStreams.length; i++) {
+        console.log("Logging sortedStreams:", this.sortedStreams[i].user_name);
+        // replace chat modal with new clicked person
+        if (this.sortedStreams.length === 3) {
+          this.sortedStreams[i].player._iframe.remove();
+          this.sortedStreams.shift();
         }
+        var iframe = window.parent.document.getElementById("chat-embed");
+        // iframe.contentWindow.location.reload(true);
+        console.log(this.sortedStreams);
+        console.log(iframe);
       }
+
       // Remove a stream if more than 2: delete iFrame from streams array
     },
     removePlayer: function () {},
