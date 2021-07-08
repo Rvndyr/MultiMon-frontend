@@ -15,7 +15,7 @@
     </section>
     <div class="row">
       <div class="col-sm p-3" v-if="twitchAccessToken">
-        <span><h3>Followers:</h3></span>
+        <h3>Followers:</h3>
 
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
@@ -102,7 +102,7 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active twitch-chat" id="home" role="tabpanel" aria-labelledby="home-tab">
             <iframe
-              id="chat-embed"
+              :id="`chat-${this.sortedStreams[0].user_id}-embed`"
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
@@ -129,6 +129,13 @@
 </template>
 
 <style>
+.childElement {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  margin-top: 10px;
+  padding: 10px;
+}
 iframe {
   border: 0 none;
 }
@@ -194,15 +201,37 @@ export default {
       this.sortedStreams = this.streams.sort((a, b) => b - a);
       for (let i = 0; i < this.sortedStreams.length; i++) {
         console.log("Logging sortedStreams:", this.sortedStreams[i].user_name);
+
         // replace chat modal with new clicked person
         if (this.sortedStreams.length === 3) {
           this.sortedStreams[i].player._iframe.remove();
           this.sortedStreams.shift();
         }
-        var iframe = window.parent.document.getElementById("chat-embed");
-        // iframe.contentWindow.location.reload(true);
-        console.log(this.sortedStreams);
-        console.log(iframe);
+        // const childElements = document.querySelectorAll(".childElement");
+        // childElements.forEach((childElement) => {
+        //   // create button for each childElement
+        //   const deleteButton = document.createElement("button");
+        //   deleteButton.setAttribute("hidden", "");
+        //   deleteButton.innerText = "Click to delete";
+        //   // append button to the childElement
+        //   childElement.appendChild(deleteButton);
+
+        //   // add event listeners
+        //   childElement.addEventListener("mouseenter", (event) => {
+        //     deleteButton.removeAttribute("hidden");
+        //     console.log(event);
+        //   });
+
+        //   childElement.addEventListener("mouseleave", (event) => {
+        //     deleteButton.setAttribute("hidden", "");
+        //     console.log(event);
+        //   });
+
+        //   deleteButton.addEventListener("click", (event) => {
+        //     childElement.setAttribute("hidden", "");
+        //     console.log(event);
+        //   });
+        // });
       }
 
       // Remove a stream if more than 2: delete iFrame from streams array
