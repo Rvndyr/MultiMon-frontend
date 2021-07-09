@@ -5,7 +5,11 @@
   </div>
 </template>
 
-<style></style>
+<style>
+html body {
+  background-color: #6f42c1;
+}
+</style>
 <script>
 import NavBar from "@/components/NavBar.vue";
 export default {

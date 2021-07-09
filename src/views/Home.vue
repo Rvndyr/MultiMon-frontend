@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <section v-if="!twitchAccessToken === null"> -->
-    <section>
+    <!-- <section>
       <main class="container text-center">
         <h1>Welcome!</h1>
         <h2>Please Sign in</h2>
@@ -12,17 +12,20 @@
           Sign in with Twitch
         </a>
       </main>
-    </section>
+    </section> -->
     <div class="row">
       <div class="col-sm p-3" v-if="twitchAccessToken">
         <h3>Followers:</h3>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
-            <ol class="list-group list-group-flush">
-              <li class="list-group-item-action d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">
+            <ol class="list-group bg-transparent">
+              <li class="list-group-item-action d-flex align-items-start">
+                <div class="ms-2 me-auto text-dark">
+                  <div class="fw-bold text-dark">
                     {{ follow.user_name }}
+                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
                   </div>
                   Playing: {{ follow.game_name }} | Viewer Count: {{ follow.viewer_count }}
                 </div>
@@ -125,9 +128,6 @@
   </div>
 </template>
 <style>
-.childElement {
-  background-color: black;
-}
 iframe {
   border: 0 none;
 }
@@ -171,6 +171,7 @@ export default {
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
         .then((response) => {
           this.follows = response.data.follows;
+          console.log("After Twitch_access_token runs", this.follows);
         });
     }
   },
@@ -181,12 +182,13 @@ export default {
         width: 950,
         height: 600,
         channel: follow.user_name,
-        parent: ["embed.example.com", "othersite.example.com"],
+        parent: [],
       };
       // change Embed to Player to remove chat from video
       let player = new Twitch.Player(follow.user_id, options);
       player.setVolume(0.5);
       follow.player = player;
+      console.log(follow);
       this.streams.push(follow);
       this.sortedStreams = this.streams.sort((a, b) => b - a);
       for (let i = 0; i < this.sortedStreams.length; i++) {
