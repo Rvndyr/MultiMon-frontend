@@ -1,21 +1,17 @@
 <template>
   <div class="home">
-    <!-- <section v-if="!twitchAccessToken === null"> -->
-    <!-- <section>
-      <main class="container text-center">
-        <h1>Welcome!</h1>
-        <h2>Please Sign in</h2>
-        <a
-          class="btn btn-lg btn-secondary"
-          href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
-        >
-          Sign in with Twitch
-        </a>
-      </main>
-    </section> -->
+    <section>
+      <b-avatar
+        class="d-flex iconWeight"
+        size="88px"
+        :src="currentUser.profile_image_url"
+        v-bind:key="currentUser.id"
+      ></b-avatar>
+      <span class="fw-bold iconWeight">{{ currentUser.display_name }}</span>
+    </section>
     <div class="row">
       <div class="col-sm p-3" v-if="twitchAccessToken">
-        <h3>Followers:</h3>
+        <span class="ml-1"><h3>Followers:</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
             <ol class="list-group bg-transparent">
@@ -128,6 +124,12 @@
   </div>
 </template>
 <style>
+.list-group-item-action:hover {
+  background: red !important;
+}
+.iconWeight {
+  margin: 3em 3em 0 5em;
+}
 iframe {
   border: 0 none;
 }
@@ -150,6 +152,7 @@ export default {
       follows: [],
       streams: [],
       sortedStreams: [],
+      currentUser: {},
     };
   },
   created: function () {
@@ -170,6 +173,8 @@ export default {
       axios
         .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
         .then((response) => {
+          console.log("res data", response.data);
+          this.currentUser = response.data.user;
           this.follows = response.data.follows;
           console.log("After Twitch_access_token runs", this.follows);
         });

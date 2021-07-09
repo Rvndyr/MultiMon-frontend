@@ -7,7 +7,7 @@
 
 <style>
 html body {
-  background-color: #6f42c1;
+  background: linear-gradient(to right, rgb(142, 45, 226), rgb(74, 0, 224));
 }
 </style>
 <script>
