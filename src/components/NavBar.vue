@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3b3b44">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Twitch Multi-Mon</a>
+        <a class="navbar-brand navBrand" href="#">Multi-Mon</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -15,7 +15,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse navFont" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
@@ -44,8 +44,15 @@ export default {};
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 a {
   color: #fff !important;
   font-weight: 500;
+}
+.navBrand {
+  font-family: "Press Start 2P", cursive;
+}
+.navFont {
+  font-family: "Encode Sans SC", sans-serif;
 }
 </style>

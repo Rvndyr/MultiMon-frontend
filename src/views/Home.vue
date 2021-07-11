@@ -11,19 +11,19 @@
     </section>
     <div class="row">
       <div class="col-sm p-3" v-if="twitchAccessToken">
-        <span class="ml-1"><h3>Followers:</h3></span>
+        <span class="ml-1"><h3>Follows(live):</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-on:click="twitchPlayer(follow)">
             <ol class="list-group bg-transparent">
               <li class="list-group-item-action d-flex align-items-start">
-                <div class="ms-2 me-auto text-dark">
-                  <div class="fw-bold text-dark">
+                <div class="ms-2 me-auto followersWeight">
+                  <div class="fw-bold followersSubWeight">
                     {{ follow.user_name }}
                     <div class="spinner-grow spinner-grow-sm text-danger" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>
                   </div>
-                  Playing: {{ follow.game_name }} | Viewer Count: {{ follow.viewer_count }}
+                  Playing: {{ follow.game_name }} | Viewers: {{ follow.viewer_count }}
                 </div>
               </li>
             </ol>
@@ -123,9 +123,25 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@600&display=swap");
+html,
+body,
+span,
+p,
+button,
+h5 {
+  color: whitesmoke;
+  font-family: "Encode Sans SC", sans-serif;
+}
+.followersWeight {
+  color: #ffc5bb;
+}
+.followersSubWeight {
+  color: whitesmoke;
+}
 .list-group-item-action:hover {
-  background: red !important;
+  background: #ba53de !important;
 }
 .iconWeight {
   margin: 3em 3em 0 5em;
@@ -137,7 +153,11 @@ iframe {
   background-color: #3b3b44;
 }
 .chatOffMain {
-  background-color: #adb5bd;
+  background-color: transparent;
+}
+.nav-link:focus,
+.nav-link:hover {
+  color: #ba53de;
 }
 .chatcanvas {
   float: right;
