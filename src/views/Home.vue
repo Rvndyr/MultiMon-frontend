@@ -13,7 +13,7 @@
       <div class="col-sm p-3" v-if="twitchAccessToken">
         <span class="ml-1"><h3>Follows(live):</h3></span>
         <div v-for="follow in follows" v-bind:key="follow.id">
-          <div v-on:click="twitchPlayer(follow)">
+          <div @click="twitchPlayer(follow)">
             <ol class="list-group bg-transparent">
               <li class="list-group-item-action d-flex align-items-start">
                 <div class="ms-2 me-auto followersWeight">
@@ -36,17 +36,31 @@
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
+        <div>
+          <b-row class="d-flex align-items-center">
+            <b-col class="ml-auto">
+              <b-button class="removeStylesBtn">
+                <b-icon icon="arrow-down" animation="cylon-vertical" font-scale="3"></b-icon>
+              </b-button>
+              <b-button class="removeStylesBtn">
+                <b-icon icon="arrow-up" animation="cylon-vertical" font-scale="3"></b-icon>
+              </b-button>
+            </b-col>
+          </b-row>
+        </div>
       </div>
+
       <div class="col-sm">
-        <button
+        <b-button
           class="btn btn-secondary"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
           aria-controls="offcanvasScrolling"
         >
+          <b-icon icon="chat-right-dots"></b-icon>
           Open Chat
-        </button>
+        </b-button>
       </div>
     </div>
     <!-- Offcanvas Modal -->
@@ -121,6 +135,11 @@
         </div>
       </div>
     </div>
+    <!-- <grid :draggable="true" :sortable="true" :items="items" :height="100" :width="100">
+      <template slot="cell" scope="props">
+        <div>{{ props.item }}</div>
+      </template>
+    </grid> -->
   </div>
 </template>
 <style scoped>
@@ -166,11 +185,30 @@ iframe {
   margin: 0px;
   padding: 0;
 }
+.removeStylesBtn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.removeStylesBtn:hover {
+  background: none;
+  color: #fff;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
 </style>
 
 <script>
 /* global Twitch */
 import axios from "axios";
+
 export default {
   data: function () {
     return {
@@ -179,6 +217,7 @@ export default {
       streams: [],
       sortedStreams: [],
       currentUser: {},
+      items: [],
     };
   },
   created: function () {
@@ -222,6 +261,7 @@ export default {
       console.log(follow);
       this.streams.push(follow);
       this.sortedStreams = this.streams.sort((a, b) => b - a);
+      this.items = this.streams.sort((a, b) => b - a);
       for (let i = 0; i < this.sortedStreams.length; i++) {
         console.log("Logging sortedStreams:", this.sortedStreams[i].user_name);
         // Remove a stream if more than 2: delete iFrame from streams array
@@ -232,6 +272,21 @@ export default {
         }
       }
     },
+    // For items-grid array -> add strings to grid to test, see:https://github.com/euvl/vue-js-grid
+    // click({ items, index }) {
+    //   let value = items.find((v) => v.index === index);
+    //   this.selected = value.item;
+    //   console.log(this.selected);
+    // },
+    // change(event) {
+    //   console.log("change", event);
+    // },
+    // remove(event) {
+    //   console.log("remove", event);
+    // },
+    // sort(event) {
+    //   console.log("sort", event);
+    // },
   },
 };
 </script>
