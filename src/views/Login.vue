@@ -60,7 +60,7 @@
   background: linear-gradient(87deg, #6c757d, #6c757d) !important;
 }
 .fill-default {
-  fill: #6f42c1;
+  fill: #6c757d;
 }
 *,
 :after,

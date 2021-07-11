@@ -39,7 +39,7 @@
       </div>
       <div class="col-sm">
         <button
-          class="btn btn-outline-success"
+          class="btn btn-secondary"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
@@ -51,18 +51,18 @@
     </div>
     <!-- Offcanvas Modal -->
     <div
-      class="offcanvas offcanvas-end"
+      class="offcanvas offcanvas-end chatoffbody"
       data-bs-scroll="true"
       data-bs-backdrop="false"
       tabindex="0"
       id="offcanvasScrolling"
       aria-labelledby="offcanvasScrollingLabel"
     >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Twitch Chat</h5>
+      <div class="offcanvas-header chatoffbody">
+        <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">Twitch Chat</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body chatOffMain">
         <!-- Nav inside offcanvas modal - This is where chat goes -->
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -132,6 +132,12 @@
 }
 iframe {
   border: 0 none;
+}
+.chatoffbody {
+  background-color: #3b3b44;
+}
+.chatOffMain {
+  background-color: #adb5bd;
 }
 .chatcanvas {
   float: right;

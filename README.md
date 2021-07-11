@@ -1,7 +1,7 @@
 # Twitch Multi-Mon
 
 Multi-Mon is a tool that allows a twitch user to watch multiple streams at once in 1 browser window.
-Remove the frustration of going into multiple tabs to support your streamer friends with views. You can now stay in one window and watch and chat with multiple streamers at once!
+Remove the frustration of going into multiple tabs in your browser to support your favorite streamer. You can now stay in one window,chat and watch with multiple streamers at once!
 
 ## Contributing
 
@@ -21,9 +21,9 @@ Contributions are always welcome! I am always a student and willing to learn. Pl
 
 ## Tech Stack
 
-**Client:** Vue, Vue Router, Axios, BootstrapCSS
+**Front-end:** Vue, Vue Router, Axios, BootstrapCSS
 
-**Server:** Node, Ruby on Rails
+**Back-end:** Node, Ruby on Rails
 
 ## 🔗 Links
 

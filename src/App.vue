@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
+    <nav-bar v-if="!['Login'].includes($route.name)"></nav-bar>
+
     <router-view />
   </div>
 </template>

@@ -27,10 +27,11 @@
               <router-link class="nav-link" to="Login">Login</router-link>
             </li>
           </ul>
-          <form class="d-flex">
+          <!-- Search function not yet impletmented -->
+          <!-- <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
             <button class="btn btn-secondary" type="submit">Search</button>
-          </form>
+          </form> -->
         </div>
       </div>
     </nav>
