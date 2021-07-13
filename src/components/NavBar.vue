@@ -23,8 +23,11 @@
             <li class="nav-item">
               <router-link class="nav-link" to="About">About</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!isLoggedIn()">
               <router-link class="nav-link" to="Login">Login</router-link>
+            </li>
+            <li class="nav-item" v-if="isLoggedIn()">
+              <router-link class="nav-link" to="Logout">Logout</router-link>
             </li>
           </ul>
           <!-- Search function not yet impletmented -->
@@ -39,7 +42,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    isLoggedIn: function () {
+      return localStorage.getItem("twitch_access_token");
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

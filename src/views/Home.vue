@@ -249,6 +249,8 @@ export default {
           this.follows = response.data.follows;
           console.log("After Twitch_access_token runs", this.follows);
         });
+    } else {
+      this.$router.push("/login");
     }
   },
   mounted() {},

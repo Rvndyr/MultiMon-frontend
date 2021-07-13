@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import Logout from "../views/Logout.vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -29,6 +30,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: Logout,
   },
 ];
 
