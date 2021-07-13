@@ -1,5 +1,10 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <section class="container">
+      <main class="d-flex justify-content-center mb-3">
+        <h2>tl:dr</h2>
+        <p></p>
+      </main>
+    </section>
   </div>
 </template>
