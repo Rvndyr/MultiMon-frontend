@@ -145,6 +145,9 @@
           <b-link href="https://github.com/Rvndyr" target="_blank">
             <b-icon icon="github" variant="light" font-scale="2"></b-icon>
           </b-link>
+          <b-link href="https://www.linkedin.com/in/randyrod" target="_blank">
+            <b-icon icon="linkedin" variant="light" font-scale="2"></b-icon>
+          </b-link>
         </div>
       </div>
     </b-footer>
