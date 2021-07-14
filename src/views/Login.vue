@@ -36,7 +36,7 @@
               <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
                 <a
-                  href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=https://multi-mon.netlify.app&response_type=code&scope=user:read:email%20user:read:follows"
+                  href="https://id.twitch.tv/oauth2/authorize?client_id=eliq1ssshmd7dc0z0ohal5zz8pszlc&redirect_uri=http://localhost:8080&response_type=code&scope=user:read:email%20user:read:follows"
                   class="btn btn-neutral btn-icon"
                 >
                   <span class="btn-inner--icon">
