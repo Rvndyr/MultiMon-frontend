@@ -36,7 +36,7 @@
         <div v-for="follow in follows" v-bind:key="follow.id">
           <div v-bind:id="follow.user_id"></div>
         </div>
-        <div>
+        <!-- <div>
           <b-row class="d-flex align-items-center">
             <b-col class="ml-auto">
               <b-button v-if="sortedStreams.length >= 2" @click="swapPlayerDown(sortedStreams)" class="removeStylesBtn">
@@ -47,7 +47,7 @@
               </b-button>
             </b-col>
           </b-row>
-        </div>
+        </div> -->
       </div>
 
       <div class="col-sm">
@@ -135,18 +135,19 @@
         </div>
       </div>
     </div>
-    <footer class="footer pt-10 pb-5 mt-auto">
+    <b-footer class="footer pt-10 pb-5 mt-auto">
       <hr class="my-5" />
-      <div class="align-items-center">
-        <div class="col-md-6 small text-white">Copyright &copy; Multi-Mon.com 2021</div>
+      <div class="">
+        <div class="col-md-6 small text-white">Copyright &copy; Multi-Mon.tv 2021</div>
         <div class="col-md-6 small text-white">Made with 💙 : ☕️</div>
+
         <div class="col-md-6 small text-white">
           <b-link href="https://github.com/Rvndyr" target="_blank">
             <b-icon icon="github" variant="light" font-scale="2"></b-icon>
           </b-link>
         </div>
       </div>
-    </footer>
+    </b-footer>
   </div>
 </template>
 <style scoped>

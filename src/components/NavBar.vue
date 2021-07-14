@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3b3b44">
       <div class="container-fluid">
-        <a class="navbar-brand navBrand" href="#">Multi-Mon</a>
+        <router-link class="navbar-brand navBrand" to="/">Multi-Mon</router-link>
         <button
           class="navbar-toggler"
           type="button"
