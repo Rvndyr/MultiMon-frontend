@@ -265,7 +265,6 @@ user agent stylesheet a:-webkit-any-link {
   text-align: center !important;
 }
 .card {
-  position: absolute;
   bottom: 65px;
   /* left: 40px; */
   display: -webkit-box;
