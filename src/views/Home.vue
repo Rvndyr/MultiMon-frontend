@@ -46,7 +46,7 @@
                 <b-icon icon="arrow-up" animation="cylon-vertical" font-scale="3"></b-icon>
               </b-button>
             </b-col>
-          </b-row>
+          </b-row> 
         </div> -->
       </div>
 
