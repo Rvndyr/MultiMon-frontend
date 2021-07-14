@@ -232,7 +232,9 @@ export default {
   },
   created: function () {
     var twitchCode = this.$route.query.code;
+    var routeQuery = this.$route;
     console.log("The twitch Code is ", twitchCode);
+    console.log("The Route Query is ", routeQuery);
     if (twitchCode) {
       var params = { code: twitchCode };
       axios.post("/twitch_authorize", params).then((response) => {
@@ -242,7 +244,7 @@ export default {
       });
     }
     this.twitchAccessToken = localStorage.getItem("twitch_access_token");
-    console.log("Helloppp", this.twitchAccessToken);
+    console.log("TwitchAccessToken:", this.twitchAccessToken);
     if (this.twitchAccessToken) {
       // Get user info
       axios.get("/twitch_user_info?twitch_access_token=" + this.twitchAccessToken).then((response) => {
@@ -283,18 +285,19 @@ export default {
         }
       }
     },
-    swapPlayerDown: function (sortedStreams) {
-      console.log("SwappedStreams button", sortedStreams);
-      let swappedStream = this.sortedStreams[0];
+    // writing a swap player function
+    // swapPlayerDown: function (sortedStreams) {
+    //   console.log("SwappedStreams button", sortedStreams);
+    //   let swappedStream = this.sortedStreams[0];
 
-      this.sortedStreams[0] = this.sortedStreams[1];
-      this.sortedStreams[1] = swappedStream;
-      document.getElementById(`${this.sortedStreams[0].user_id}`).src = document.getElementById(
-        `${this.sortedStreams[0].user_id}`
-      ).src;
+    //   this.sortedStreams[0] = this.sortedStreams[1];
+    //   this.sortedStreams[1] = swappedStream;
+    //   document.getElementById(`${this.sortedStreams[0].user_id}`).src = document.getElementById(
+    //     `${this.sortedStreams[0].user_id}`
+    //   ).src;
 
-      console.log("Swapped Down!");
-    },
+    //   console.log("Swapped Down!");
+    // },
   },
 };
 </script>

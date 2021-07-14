@@ -14,14 +14,14 @@ Contributions are always welcome! I am always a student and willing to learn. Pl
 
 ```bash
 
-  cd capstone-frontend
+  cd MultiMon-frontend
   npm install
   npm run serve
 ```
 
 ## Tech Stack
 
-**Front-end:** Vue, Vue Router, Axios, BootstrapCSS
+**Front-end:** Vue, VueX, Vue Router, Axios, BootstrapCSS
 
 **Back-end:** Node, Ruby on Rails
 
