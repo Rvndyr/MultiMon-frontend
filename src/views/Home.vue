@@ -116,7 +116,7 @@
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${this.sortedStreams[0].user_name}/chat?parent=https://multi-mon.netlify.app`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[0].user_name}/chat?parent=multi-mon.netlify.app`"
               allow-storage-access-by-user-activation="true"
               v-if="this.sortedStreams.length > 0"
             ></iframe>
@@ -127,7 +127,7 @@
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${this.sortedStreams[1].user_name}/chat?parent=https://multi-mon.netlify.app`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[1].user_name}/chat?parent=multi-mon.netlify.app`"
               allow-storage-access-by-user-activation="true"
               v-if="this.sortedStreams.length > 1"
             ></iframe>
