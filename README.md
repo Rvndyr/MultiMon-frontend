@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e61b2d38-032a-47b9-8ce6-d895bbb1f49f/deploy-status)](https://app.netlify.com/sites/multi-mon/deploys)
+
 # Twitch Multi-Mon
 
 Multi-Mon is a tool that allows a twitch user to watch multiple streams at once in 1 browser window.
