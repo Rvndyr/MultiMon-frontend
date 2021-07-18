@@ -9,7 +9,7 @@ import Grid from "vue-js-grid";
 Vue.use(Grid);
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://calm-reef-86729.herokuapp.com/";
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://calm-reef-86729.herokuapp.com";
 
 Vue.config.productionTip = false;
 
