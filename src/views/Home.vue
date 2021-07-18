@@ -135,7 +135,7 @@
         </div>
       </div>
     </div>
-    <b-footer class="footer pt-10 pb-5 mt-auto">
+    <footer class="footer pt-10 pb-5 mt-auto">
       <hr class="my-5" />
       <div class="">
         <div class="col-md-6 small text-white">Copyright &copy; Multi-Mon.tv 2021</div>
@@ -145,9 +145,12 @@
           <b-link href="https://github.com/Rvndyr" target="_blank">
             <b-icon icon="github" variant="light" font-scale="2"></b-icon>
           </b-link>
+          <b-link href="https://www.linkedin.com/in/randyrod" target="_blank">
+            <b-icon icon="linkedin" variant="light" font-scale="2"></b-icon>
+          </b-link>
         </div>
       </div>
-    </b-footer>
+    </footer>
   </div>
 </template>
 <style scoped>
@@ -229,32 +232,32 @@ export default {
   },
   created: function () {
     var twitchCode = this.$route.query.code;
+    var routeQuery = this.$route;
     console.log("The twitch Code is ", twitchCode);
+    console.log("The Route Query is ", routeQuery);
     if (twitchCode) {
       var params = { code: twitchCode };
-      axios.post("http://localhost:3000/twitch_authorize", params).then((response) => {
+      axios.post("/twitch_authorize", params).then((response) => {
         console.log("twitch access token", response.data);
         localStorage.setItem("twitch_access_token", response.data.access_token);
         this.$router.push("/");
       });
     }
     this.twitchAccessToken = localStorage.getItem("twitch_access_token");
-    console.log("Helloppp", this.twitchAccessToken);
+    console.log("TwitchAccessToken:", this.twitchAccessToken);
     if (this.twitchAccessToken) {
       // Get user info
-      axios
-        .get("http://localhost:3000/twitch_user_info?twitch_access_token=" + this.twitchAccessToken)
-        .then((response) => {
-          console.log("res data", response.data);
-          this.currentUser = response.data.user;
-          this.follows = response.data.follows;
-          console.log("After Twitch_access_token runs", this.follows);
-        });
+      axios.get("/twitch_user_info?twitch_access_token=" + this.twitchAccessToken).then((response) => {
+        console.log("res data", response.data);
+        this.currentUser = response.data.user;
+        this.follows = response.data.follows;
+        console.log("After Twitch_access_token runs", this.follows);
+      });
     } else {
       this.$router.push("/login");
     }
   },
-  mounted() {},
+
   methods: {
     twitchPlayer: function (follow) {
       let options = {
@@ -282,18 +285,19 @@ export default {
         }
       }
     },
-    swapPlayerDown: function (sortedStreams) {
-      console.log("SwappedStreams button", sortedStreams);
-      let swappedStream = this.sortedStreams[0];
+    // writing a swap player function
+    // swapPlayerDown: function (sortedStreams) {
+    //   console.log("SwappedStreams button", sortedStreams);
+    //   let swappedStream = this.sortedStreams[0];
 
-      this.sortedStreams[0] = this.sortedStreams[1];
-      this.sortedStreams[1] = swappedStream;
-      document.getElementById(`${this.sortedStreams[0].user_id}`).src = document.getElementById(
-        `${this.sortedStreams[0].user_id}`
-      ).src;
+    //   this.sortedStreams[0] = this.sortedStreams[1];
+    //   this.sortedStreams[1] = swappedStream;
+    //   document.getElementById(`${this.sortedStreams[0].user_id}`).src = document.getElementById(
+    //     `${this.sortedStreams[0].user_id}`
+    //   ).src;
 
-      console.log("Swapped Down!");
-    },
+    //   console.log("Swapped Down!");
+    // },
   },
 };
 </script>
