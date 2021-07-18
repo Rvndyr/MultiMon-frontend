@@ -116,7 +116,7 @@
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${this.sortedStreams[0].user_name}/chat?parent=multi-mon.netlify.app`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[0].user_name}/chat?parent=multi-mon.netlify.app&parent=localhost`"
               allow-storage-access-by-user-activation="true"
               v-if="this.sortedStreams.length > 0"
             ></iframe>
@@ -127,7 +127,7 @@
               frameborder="0"
               scrolling="no"
               class="chatcanvas"
-              :src="`https://www.twitch.tv/embed/${this.sortedStreams[1].user_name}/chat?parent=multi-mon.netlify.app`"
+              :src="`https://www.twitch.tv/embed/${this.sortedStreams[1].user_name}/chat?parent=multi-mon.netlify.app&parent=localhost`"
               allow-storage-access-by-user-activation="true"
               v-if="this.sortedStreams.length > 1"
             ></iframe>
@@ -264,7 +264,7 @@ export default {
         width: 950,
         height: 600,
         channel: follow.user_name,
-        parent: [],
+        parent: ["embed.example.com", "othersite.example.com"],
       };
       // change Embed to Player to remove chat from video
       let player = new Twitch.Player(follow.user_id, options);
