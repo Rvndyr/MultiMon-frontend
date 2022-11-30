@@ -29,4 +29,4 @@ Contributions are always welcome! I am always a student and willing to learn. Pl
 
 ## 🔗 Links
 
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/randyrod/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/randyrod/) ::: https://multi-mon.netlify.app
